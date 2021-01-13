@@ -31,7 +31,7 @@ router.get('/profile', (req, res, next) => {
 	res.send('GET profile');
 });
 
-/* PUT /profile */
+/* PUT /profile/user_id */
 router.put('/profile', (req, res, next) => {
 	res.send('PUT /profile/user_id');
 });
@@ -46,12 +46,12 @@ router.put('/forgot-pw', (req, res, next) => {
 	res.send('PUT forgot-pw');
 });
 
-/* GET reset-password */
+/* GET reset-password/:token */
 router.get('/reset/:token', (req, res, next) => {
-	router.send('GET /reset/:token');
+	res.send('GET /reset/:token');
 });
 
-/* PUT reset-password */
+/* PUT reset-password:token */
 router.put('/reset/:token', (req, res, next) => {
 	res.send('PUT /reset/:token');
 });
