@@ -11,7 +11,7 @@ const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
+const UserSchema = new Schema({
 	email: String,
 	/*
 	password and name can be ommited because they are going to be included with
@@ -26,6 +26,6 @@ const userSchema = new Schema({
 	]
 });
 
-userSchema.plugin(passportLocalMongoose);
+UserSchema.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model('User', UserSchema);
