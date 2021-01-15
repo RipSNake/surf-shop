@@ -18,13 +18,18 @@ const reviewsRouter = require('./routes/reviews');
 const app = express();
 
 // Connect to the database
-mongoose.connect('mongodb://localhost:27017/surf-shop', { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost:27017/surf-shop', { 
+  useCreateIndex: true, 
+  useNewUrlParser: true, 
+  useUnifiedTopology: true 
+});
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection errors:'));
 db.once('open', () => {
   console.log('we\'re connected');
 })
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -44,6 +49,9 @@ app.use(session({
 }))
 
 // Set up passport
+app.use(passport.initialize());
+app.use(passport.session());
+
 passport.use(User.createStrategy());
 
 passport.serializeUser(User.serializeUser());
