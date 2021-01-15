@@ -8,8 +8,8 @@ module.exports = {
 			image: req.body.image
 		});
 
-		await User.register(newUser, req.body.password)
-		res.redirect('/');
+		await User.register(newUser, req.body.password);
+		res.redirect('/'); // Redirects to home page (index page)
 
 	}
 }
