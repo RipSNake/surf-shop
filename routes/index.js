@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const passport = requite('passport');
-const { postRegister } = require('../controllers/index'); // Destroctoring pull the value/method from the object exported from controllers/index.js
+const { postRegister, postLogin, getLogout } = require('../controllers/index'); // Destroctoring pull the value/method from the object exported from controllers/index.js
 const { errorHandler } = require('../middleware/index');
 
 /* GET home page. */
@@ -23,16 +22,10 @@ router.get('/login', (req, res, next) => {
 });
 
 /* POST login */
-router.post('/login', passport.authenticate('local', {
-	successRedirect: '/',
-	failureRedirect: '/login'
-}));
+router.post('/login', postLogin);
 
 /* GET logout */
-router.get('/logout', (req, res, nex) => {
-	req.logout(); // get rid off the session
-	req.redirect('/');
-});
+router.get('/logout', getLogout);
 
 /* GET /profile */
 router.get('/profile', (req, res, next) => {
