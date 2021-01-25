@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { postRegister, postLogin, getLogout } = require('../controllers/index'); // Destroctoring pull the value/method from the object exported from controllers/index.js
-const { errorHandler } = require('../middleware/index');
+const { postRegister, postLogin, getLogout } = require('../controllers/index'); // Destructoring pull the value/method from the object exported from controllers/index.js
+const { asyncErrorHandler } = require('../middleware/index');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next) => {
   res.render('index', { title: 'Surf Shop - Home' });
 });
 
@@ -14,7 +14,7 @@ router.get('/register', (req, res, next) => {
 });
 
 /* POST /register */
-router.post('/register', errorHandler(postRegister));
+router.post('/register', asyncErrorHandler(postRegister));
 
 /* GET /login */
 router.get('/login', (req, res, next) => {
@@ -22,7 +22,7 @@ router.get('/login', (req, res, next) => {
 });
 
 /* POST login */
-router.post('/login', postLogin);
+router.post('/login', asyncErrorHandler(postLogin));
 
 /* GET logout */
 router.get('/logout', getLogout);

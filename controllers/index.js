@@ -16,12 +16,12 @@ module.exports = {
 	},
 
 	// POST /login
-	postLogin(req, res, next) {
-		passport.authenticate('local', {
+	async postLogin(req, res, next) {
+		await passport.authenticate('local', {
 			successRedirec: '/', // Login succesfull
 			failureRedirect: '/login' // Failed login
 		})(req, res, next); // Added in order to make passport.authentica have access to the parameters and get invoked correctly
-
+	},
 	// GET /logout
 	getLogout(req, res, next) {
 		req.logout(); // end session
