@@ -1,0 +1,31 @@
+<h2>Create New Post</h2>
+<form action="/posts" method="POST" enctype="multipart/form-data" id="newForm">
+	<div>
+		<label for="title">Title</label><br />
+		<input type="text" name="post[title]" />	
+	</div>
+	
+	<div>
+		<label for="images">Images</label><br />
+		<input type="file" accept="images/*" multiple name="images" />	
+	</div>
+
+	<div>
+		<label for="price">Price</label><br />
+		<input type="text" name="post[price]" />	
+	</div>
+	
+	<div>
+		<label for="description">Description</label><br />
+		<textarea name="post[description]"></textarea>	
+	</div>
+	
+	<div>
+		<label for="location">Location</label><br />
+		<input type="text" name="post[location]" />	
+	</div>
+	
+	<div>
+		<button type="submit" form="newForm">Submit</button>
+	</div>
+</form>
