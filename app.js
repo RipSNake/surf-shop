@@ -18,7 +18,7 @@ const reviewsRouter = require('./routes/reviews');
 const app = express();
 
 // Connect to the database
-mongoose.connect('mongodb://localhost:27017/surf-shop', { 
+mongoose.connect('mongodb+srv://soymiadmin:contr0ll3r@cluster0.8ppim.mongodb.net/surf-shop?retryWrites=true&w=majority', { 
   useCreateIndex: true, 
   useNewUrlParser: true, 
   useUnifiedTopology: true 
@@ -36,7 +36,7 @@ app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -58,10 +58,9 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 // Routes
-app.use('/', indexRouter);
-app.use('/posts', postsRouter);
+app.use('/', indexRouter); // 
+app.use('/posts', postsRouter); // 
 app.use('/posts/:id/reviews', reviewsRouter); // to have access to the id of the post the review belongs to
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
