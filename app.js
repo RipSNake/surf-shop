@@ -1,13 +1,16 @@
+require('dotenv').config();
+
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
+const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const logger = require('morgan');
 const passport = require('passport');
 const User = require('./models/user');
 const session = require('express-session');
 const mongoose = require('mongoose');
+const methodOverride = require('method-override');
 
 // require routes
 const indexRouter = require('./routes/index');
@@ -18,7 +21,9 @@ const reviewsRouter = require('./routes/reviews');
 const app = express();
 
 // Connect to the database
-mongoose.connect('mongodb+srv://soymiadmin:contr0ll3r@cluster0.8ppim.mongodb.net/surf-shop?retryWrites=true&w=majority', { 
+const server = 'mongodb+srv://'+process.env.DB_USER+':'+process.env.DB_KEY+'@cluster0.8ppim.mongodb.net/'+process.env.DB_HOST+'?retryWrites=true&w=majority';
+
+mongoose.connect(server, { 
   useCreateIndex: true, 
   useNewUrlParser: true, 
   useUnifiedTopology: true 
@@ -39,6 +44,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride('_method'));
 
 // Set up session
 app.use(session({
@@ -57,6 +63,12 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+// set title middleware
+app.use(function(req, res, next) {
+  res.locals.title = "Surf Shop";
+  next();
+});
+
 // Routes
 app.use('/', indexRouter); // 
 app.use('/posts', postsRouter); // 
@@ -64,7 +76,9 @@ app.use('/posts/:id/reviews', reviewsRouter); // to have access to the id of the
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+  const err = new Error('Not Found');
+  err.status = 404;
+  next(err);
 });
 
 // error handler
