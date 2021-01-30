@@ -20,8 +20,6 @@ const PostSchema = new Schema({
 	description: String,
 	images: [ { url: String, public_id: String } ],
 	location: String,
-	lat: Number,
-	lng: Number,
 	author: {
 		type: Schema.Types.ObjectId,
 		ref: 'User'
