@@ -1,5 +1,5 @@
 const Post = require('../models/post');
-const cloudinary = require('cloudinary').v2;
+const cloudinary = require('cloudinary');
 cloudinary.config({
 	cloud_name: 'ripsnake',
 	api_key: '927767136794841',
@@ -24,7 +24,7 @@ module.exports = {
 
 		// Upload images to cloudinary
 		for(const file of req.files){
-			let image = await cloudinary.uploader.upload(image.path);
+			let image = await cloudinary.v2.uploader.upload(file.path);
 			// Add clodinary image data to images array
 			req.body.post.images.push({
 				url: image.secure_url,
