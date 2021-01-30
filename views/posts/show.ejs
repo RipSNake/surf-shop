@@ -9,9 +9,34 @@
 	</div>
 	
 	<div>
+		IMAGES
+	</div>
+	<div>
 		<%= post.description %>	
 	</div>
 	
 	<div>
 		<%= post.location %>	
 	</div>
+
+	<div id="map">
+
+	</div>
+
+	<div>
+<button onClick="location.href='/posts';">BACK</button>
+
+<form action="/posts/<%= post.id %>?_method=DELETE" method="POST">
+	<input type="submit" value="DELETE"/>
+</form>
+</div>
+
+<script>
+var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
+ 
+mapboxgl.accessToken = 'pk.eyJ1Ijoicmlwc25ha2UiLCJhIjoiY2trZmc5bHRuMDdiNzJ3bzVjMWg0MWllOSJ9.XwVHDlqFeAS2UzOgCqBfXA';
+var map = new mapboxgl.Map({
+container: 'YOUR_CONTAINER_ELEMENT_ID',
+style: 'mapbox://styles/mapbox/streets-v11'
+});
+</script>
