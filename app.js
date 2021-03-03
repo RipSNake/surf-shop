@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const createError = require('http-errors');
+const engine = require('ejs-mate');
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
@@ -35,9 +36,13 @@ db.once('open', () => {
   console.log('we\'re connected');
 })
 
+// use ejs-local for all ejs templates:
+app.engine('ejs', engine);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+//set public assets directory
+app.use(express.static('public'));
 
 app.use(logger('dev'));
 app.use(express.json());

@@ -1,42 +1,24 @@
+<% layout('layouts/post-show-layout') -%>
 <h2>Show Post</h2>
 
-	<div>
-		<%= post.title %>
+	<div><%= post.title %></div>
+	<div><%= post.price %></div>
+	<div>IMAGES<br />
+		<% post.images.forEach(function(image) { %>
+			<img src="<% image.url %>" alt="Surf board image" width="200px">
+		<% }); %>
 	</div>
+	<div><%= post.description %></div>
 	
-	<div>
-		<%= post.price %>
-	</div>
-	
-	<div>
-		IMAGES
-	</div>
-	<div>
-		<%= post.description %>	
-	</div>
-	
-	<div>
-		<%= post.location %>	
-	</div>
+	<div><%= post.location %></div>
 
-	<div id="map">
-
-	</div>
+	<div id="map" style="width: 400px; height: 300px; background: #cde;"></div>
 
 	<div>
+
 <button onClick="location.href='/posts';">BACK</button>
 
 <form action="/posts/<%= post.id %>?_method=DELETE" method="POST">
 	<input type="submit" value="DELETE"/>
 </form>
 </div>
-
-<script>
-var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
- 
-mapboxgl.accessToken = 'pk.eyJ1Ijoicmlwc25ha2UiLCJhIjoiY2trZmc5bHRuMDdiNzJ3bzVjMWg0MWllOSJ9.XwVHDlqFeAS2UzOgCqBfXA';
-var map = new mapboxgl.Map({
-container: 'YOUR_CONTAINER_ELEMENT_ID',
-style: 'mapbox://styles/mapbox/streets-v11'
-});
-</script>
