@@ -11,7 +11,7 @@ var map = new mapboxgl.Map({
 var el = document.createElement('div');
 el.className = 'marker';
 
-// make a marker for our location and add to the map
+// make a marker for our location and add it to the map
 new mapboxgl.Marker(el)
 .setLngLat(post.coordinates)
 .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
