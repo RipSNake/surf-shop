@@ -71,6 +71,12 @@ passport.deserializeUser(User.deserializeUser());
 // set title middleware
 app.use(function(req, res, next) {
   res.locals.title = "Surf Shop";
+  // set success flash message
+  res.locals.success = req.session.success || '';
+  delete req.session.success;
+  // set error flash message
+  res.locals.error = req.session.error || '';
+  delete req.session.error;
   next();
 });
 
