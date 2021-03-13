@@ -42,6 +42,7 @@ module.exports = {
 			req.body.post.coordinates = response.body.features[0].geometry.coordinates;
 		// Create post in the database and redirect to show view
 		let post = await Post.create(req.body.post);
+		res.session.success = 'Post created successfully';
 		res.redirect(`/posts/${post.id}`);	
 	},
 	// SHOW POST
