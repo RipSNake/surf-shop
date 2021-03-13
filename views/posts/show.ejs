@@ -2,15 +2,15 @@
 <h2>Show Post</h2>
 
 	<div><%= post.title %></div>
-	<div><%= post.price %></div>
 	<div>IMAGES<br />
 		<% post.images.forEach(function(image) { %>
 			<img src="<% image.url %>" alt="Surf board image" width="200px">
 		<% }); %>
 	</div>
+	<div>Price: <%= post.price %></div>
 	<div><%= post.description %></div>
-	
 	<div><%= post.location %></div>
+	
 
 	<div id="map" style="width: 400px; height: 300px; background: #cde;"></div>
 
@@ -21,4 +21,23 @@
 		<form action="/posts/<%= post.id %>?_method=DELETE" method="POST">
 			<input type="submit" value="DELETE"/>
 		</form>
+	</div>
+
+	<div>
+		<h2>Reviews</h2>
+		<!-- Create a Review -->
+		<h3>Create a Review</h3>
+		<form action="/posts/<%= post.id %>/reviews" method="POST">
+			<textarea name="review[body]" rows="30" cols="30S"></textarea>
+			<input type="number" name="review[rating]" min="1" max="5" step="1" required="required">
+
+			<input type="submit" name="submit_btn">
+		</form>
+		<!-- display all review -->
+		<% post.reviews.forEach(function(review) { %>
+			<div>
+				<%= review.body %<
+				Rating: <%= review.rating %>
+			</div>
+		<% }); %>
 	</div>
