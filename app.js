@@ -70,6 +70,12 @@ passport.deserializeUser(User.deserializeUser());
 
 // set title middleware
 app.use(function(req, res, next) {
+  // set up default user for dev purposes
+  req.user = {
+    '_id' : '5ffee34e60dcf610e87e6e2a',
+    'username' : 'admin'
+  }
+  res.locals.currentUser = req.user;
   res.locals.title = "Surf Shop";
   // set success flash message
   res.locals.success = req.session.success || '';
